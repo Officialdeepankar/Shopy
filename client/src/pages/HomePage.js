@@ -16,7 +16,7 @@ const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [cart, setCart] = useCart();
  
-  console.log("Homepage",cart);
+//  console.log("Homepage",cart);
   //get all cat
   const getAllCategory = async () => {
     try {
@@ -35,7 +35,7 @@ const HomePage = () => {
     getTotal();
   }, []);
   //get products
-  const getAllProducts = async () => {
+  const getAllProducts = async () => {// 10 product per page 
     try {
       setLoading(true);
       const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
@@ -47,7 +47,7 @@ const HomePage = () => {
     }
   };
 
-  console.log(products);
+//  console.log(products);
 
   //getTOtal COunt
   const getTotal = async () => {
@@ -63,6 +63,9 @@ const HomePage = () => {
     if (page === 10) return;
     loadMore();
   }, [page]);
+
+
+
   //load more
   const loadMore = async () => {
     try {
@@ -116,7 +119,7 @@ const HomePage = () => {
     }
   };
   return (
-    <Layout title={"ALl Products - Best offers "}>
+    <Layout title={"ALL Products - Best offers "}>
       <div className="container-fluid row mt-3">
         <div className="col-md-2">
           <h4 className="text-center">Filter By Category</h4>
@@ -130,7 +133,15 @@ const HomePage = () => {
               </Checkbox>
             ))}
           </div>
+
+
+
+
           {/* price filter */}
+
+
+
+
           <h4 className="text-center mt-4">Filter By Price</h4>
           <div className="d-flex flex-column">
             <Radio.Group onChange={(e) => setRadio(e.target.value)}>

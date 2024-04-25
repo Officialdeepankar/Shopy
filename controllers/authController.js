@@ -1,5 +1,7 @@
 import userModel from "../models/userModel.js";
 import orderModel from "../models/orderModel.js";
+
+
 import { comparePassword, hashPassword } from "./../helpers/authHelper.js";
 import JWT from "jsonwebtoken";
 
@@ -43,7 +45,7 @@ export const registerController = async (req, res) => {
       password: hashedPassword,
     }).save();
 
-    res.status(201).send({
+    res.status(201).send({//The HTTP status code 201 is used to indicate that a new resource has been successfully created as a result of the request.
       success: true,
       message: "User Register Successfully",
       user,

@@ -217,6 +217,8 @@ export const productFiltersController = async (req, res) => {
   }
 };
 
+
+
 // product count
 export const productCountController = async (req, res) => {
   try {
@@ -236,16 +238,23 @@ export const productCountController = async (req, res) => {
 };
 
 // product list base on page
-export const productListController = async (req, res) => {
+
+
+
+/*It sets up pagination by defining perPage as the number of products to display per page (in this case, 10), and page as the current page number, which is extracted from the request parameters (req.params.page). If the page parameter is not provided, it defaults to page 1.
+It queries the database using the productModel to find all products. It excludes the photo field from the results using .select("-photo"). It then applies pagination using .skip((page - 1) * perPage) to skip the appropriate number of documents based on the current page, and .limit(perPage) to limit the number of documents returned per page. Finally, it sorts the products by createdAt field in descending order (newest first) using .sort({ createdAt: -1 }). */
+export const productListController = async (req, res) => { // pagination is happeing here 
   try {
-    const perPage = 10;
+    const perPage = 10;// number of product to display per page 
     const page = req.params.page ? req.params.page : 1;
     const products = await productModel
       .find({})
       .select("-photo")
       .skip((page - 1) * perPage)
       .limit(perPage)
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 });// newest first 
+
+      
     res.status(200).send({
       success: true,
       products,
@@ -265,7 +274,17 @@ export const productListController = async (req, res) => {
 export const productCategoryController = async (req, res) => {
   try {
     const category = await categoryModel.findOne({ slug: req.params.slug });
+
+
+    
     const products = await productModel.find({ category }).populate("category");
+
+
+    /* Populating Category: Each product document in the result set contains a reference (typically an ObjectId) to its corresponding category document. Instead of just returning the ObjectId of the category, populate() fetches the actual category document from the categoryModel based on the reference and replaces the ObjectId with the actual category document.
+Sending Response: The populated products array, along with the category document, are sent as part of the HTTP response.
+*/
+   // console.log("category", category);
+    console.log("products",products);
     res.status(200).send({
       success: true,
       category,

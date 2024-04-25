@@ -1,3 +1,5 @@
+// It is a basic setup of node js application;
+
 import express from "express";
 import colors from "colors";
 import dotenv from "dotenv";
@@ -8,6 +10,7 @@ import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import cors from "cors"
 //configure env
+
 dotenv.config();
 
 //databse config

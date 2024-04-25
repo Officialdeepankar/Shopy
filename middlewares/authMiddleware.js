@@ -2,12 +2,16 @@ import JWT from "jsonwebtoken";
 import userModel from "../models/userModel.js";
 
 //Protected Routes token base
+
+// it is verifying token coming throug req and adding user to the body;
 export const requireSignIn = async (req, res, next) => {
   try {
     const decode = JWT.verify(
       req.headers.authorization,
+      
       process.env.JWT_SECRET
     );
+  //  console.log(decode);
     req.user = decode;
     next();
   } catch (error) {

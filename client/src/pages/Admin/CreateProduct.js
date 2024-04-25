@@ -76,6 +76,7 @@ const CreateProduct = () => {
           <div className="col-md-9">
             <h1>Create Product</h1>
             <div className="m-1 w-75">
+
               <Select
                style={{ border: 'none', borderBottom: '1px solid #ccc' }}
                 placeholder="Select a category"
@@ -92,6 +93,8 @@ const CreateProduct = () => {
                   </Option>
                 ))}
               </Select>
+
+
               <div className="mb-3">
                 <label className="btn btn-outline-secondary col-md-12">
                   {photo ? photo.name : "Upload Photo"}
@@ -104,11 +107,12 @@ const CreateProduct = () => {
                   />
                 </label>
               </div>
+
               <div className="mb-3">
                 {photo && (
                   <div className="text-center">
                     <img
-                      src={URL.createObjectURL(photo)}
+                      src={URL.createObjectURL(photo)}// browser property to get url of the photo updated 
                       alt="product_photo"
                       height={"200px"}
                       className="img img-responsive"
@@ -116,6 +120,9 @@ const CreateProduct = () => {
                   </div>
                 )}
               </div>
+
+
+
               <div className="mb-3">
                 <input
                   type="text"
